@@ -3,51 +3,727 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketing Agency - Home</title>
-    <link rel="stylesheet" href="style.css">
+    <title>OAKSUN | Marketing Agency</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            line-height: 1.5;
+            color: #1d1d1f;
+            background-color: #f5f5f7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(245, 245, 247, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1d1d1f;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+        
+        .logo-squares {
+            display: inline-flex;
+            gap: 2px;
+        }
+        
+        .logo-square {
+            width: 12px;
+            height: 12px;
+            background-color: #1d1d1f;
+            border-radius: 2px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #1d1d1f;
+            font-weight: 400;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #06c;
+        }
+        
+        .cta-button {
+            background-color: white;
+            color: #1d1d1f;
+            border-radius: 980px;
+            padding: 8px 20px;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1d1d1f;
+            cursor: pointer;
+        }
+        
+        .menu-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #1d1d1f;
+            border-radius: 50%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffdddd 0%, #f5f5f7 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin-top: 80px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .hero h1 {
+            font-size: 180px;
+            font-weight: 700;
+            line-height: 0.9;
+            letter-spacing: -5px;
+            margin-bottom: 32px;
+            color: white;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .flowing-gradient {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: linear-gradient(45deg, 
+                rgba(100, 149, 237, 0.3) 0%,
+                rgba(147, 112, 219, 0.3) 25%, 
+                rgba(255, 105, 180, 0.3) 50%, 
+                rgba(255, 165, 0, 0.3) 75%, 
+                rgba(100, 149, 237, 0.3) 100%);
+            z-index: -1;
+            animation: flow 30s linear infinite;
+            transform-origin: center center;
+        }
+        
+        @keyframes flow {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+        
+        /* Sections */
+        section {
+            padding: 120px 0;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 80px;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .service-card {
+            padding: 40px;
+            border-radius: 20px;
+            background-color: #f5f5f7;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        /* Clients Section */
+        .clients {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 60px;
+            margin-top: 60px;
+        }
+        
+        .client-logo {
+            width: 160px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+        
+        .client-logo:hover {
+            opacity: 1;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background-color: #f5f5f7;
+        }
+        
+        .about-text h2 {
+            font-size: 42px;
+            margin-bottom: 32px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .about-text p {
+            font-size: 18px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            color: #86868b;
+        }
+        
+        /* Blog Section */
+        .blog-preview {
+            background-color: #f5f5f7;
+        }
+        
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .blog-card {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 220px;
+            background-color: #f5f5f7;
+        }
+        
+        .blog-content {
+            padding: 32px;
+        }
+        
+        .blog-content h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .blog-content p {
+            color: #86868b;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            color: #06c;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #f5f5f7 0%, #e5e5e7 100%);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #d2d2d7;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #06c;
+            outline: none;
+        }
+        
+        .contact-form button {
+            background-color: #06c;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 980px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .contact-form button:hover {
+            background-color: #0055b3;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #f5f5f7;
+            padding: 80px 0 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column a {
+            color: #86868b;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: #1d1d1f;
+        }
+        
+        .footer-column p {
+            color: #86868b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .footer-bottom {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #d2d2d7;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            color: #86868b;
+            font-size: 12px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1100px) {
+            .hero h1 {
+                font-size: 120px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 80px;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .contact-form {
+                padding: 40px 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 60px;
+                letter-spacing: -2px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+        }
+        
+        /* Side text */
+        .side-text {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: left center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #86868b;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .side-text::before {
+            content: "";
+            width: 40px;
+            height: 1px;
+            background-color: #86868b;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <nav>
-            <div class="logo">Your Agency Name</div>
-            <ul>
-                <li><a href="index.html" class="active">Work With Me</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-squares">
+                        <div class="logo-square"></div>
+                        <div class="logo-square"></div>
+                        <div class="logo-square"></div>
+                    </div>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="work-with-me.html">Work With Me</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <a href="#contact" class="cta-button">Let's work</a>
+                    <button class="menu-button">Menu <div class="menu-dot"></div></button>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>[Main Headline - e.g., Elevate Your Brand]</h1>
-            <p>[Brief intro about what you do]</p>
-            <a href="#contact" class="cta-button">Get Started</a>
-        </section>
+    <!-- Side Text -->
+    <div class="side-text">Site of the Day</div>
 
-        <section id="services">
-            <h2>What I Can Help You With</h2>
-            <!-- Placeholder for services -->
-            <div class="service-item">[Service 1]</div>
-            <div class="service-item">[Service 2]</div>
-            <div class="service-item">[Service 3]</div>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="flowing-gradient"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <p class="subtitle">Web Design + Dev Studio</p>
+                <h1>OAKSUN</h1>
+            </div>
+        </div>
+    </section>
 
-        <section id="portfolio">
-            <h2>Who I've Worked With</h2>
-            <!-- Placeholder for client logos or case studies -->
-            <p>[Client showcase area]</p>
-        </section>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">What I Offer</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Digital Strategy</h3>
+                    <p>[Your service description will go here]</p>
+                </div>
+                <div class="service-card">
+                    <h3>Content Marketing</h3>
+                    <p>[Your service description will go here]</p>
+                </div>
+                <div class="service-card">
+                    <h3>Brand Development</h3>
+                    <p>[Your service description will go here]</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section id="contact">
-             <h2>Work With Me</h2>
-             <p>[Contact information or form placeholder]</p>
-        </section>
-    </main>
+    <!-- Clients Section -->
+    <section class="clients">
+        <div class="container">
+            <h2 class="section-title">Who I've Worked With</h2>
+            <div class="client-logos">
+                <div class="client-logo">[Logo]</div>
+                <div class="client-logo">[Logo]</div>
+                <div class="client-logo">[Logo]</div>
+                <div class="client-logo">[Logo]</div>
+                <div class="client-logo">[Logo]</div>
+                <div class="client-logo">[Logo]</div>
+            </div>
+        </div>
+    </section>
 
+    <!-- About Preview Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <!-- Replace with your actual image -->
+                </div>
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>[Short about summary will go here]</p>
+                    <p>[Another paragraph about your experience]</p>
+                    <a href="about.html" class="cta-button">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Preview Section -->
+    <section class="blog-preview">
+        <div class="container">
+            <h2 class="section-title">Latest Insights</h2>
+            <div class="blog-posts">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <!-- Blog featured image -->
+                    </div>
+                    <div class="blog-content">
+                        <h3>Blog Post Title</h3>
+                        <p>[Blog post excerpt will go here]</p>
+                        <a href="blog-post.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <!-- Blog featured image -->
+                    </div>
+                    <div class="blog-content">
+                        <h3>Blog Post Title</h3>
+                        <p>[Blog post excerpt will go here]</p>
+                        <a href="blog-post.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <!-- Blog featured image -->
+                    </div>
+                    <div class="blog-content">
+                        <h3>Blog Post Title</h3>
+                        <p>[Blog post excerpt will go here]</p>
+                        <a href="blog-post.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="blog.html" class="cta-button">View All Posts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Subject">
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Your Agency Name. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>OAKSUN</h3>
+                    <p>[Brief agency description]</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="work-with-me.html">Work With Me</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Digital Strategy</a></li>
+                        <li><a href="#">Content Marketing</a></li>
+                        <li><a href="#">Brand Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OAKSUN. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-
 </body>
 </html>
